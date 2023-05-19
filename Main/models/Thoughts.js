@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
-const assignmentSchema = require('./Reactions');
+const reactionSchema = require('./Reactions');
+const formatDate = require ('../utils/formatDate');
 
 // Schema to create Student model
 const thoughtsSchema = new Schema(
@@ -13,22 +14,27 @@ const thoughtsSchema = new Schema(
     createdAt: {
       type: Date,
       required: true,
-
+      default: Date.now,
+      get: timestamp=> formatDate(timestamp),
     },
-    github: {
+    username: {
       type: String,
       required: true,
-      max_length: 50,
     },
-    assignments: [assignmentSchema],
+    reaction: [reactionSchema],
   },
   {
     toJSON: {
       getters: true,
     },
+    id:false,
   }
 );
 
-const Student = model('student', studentSchema);
+thyoughtsSchema.virtual ('reactionCount').get(function (){
+  return this.reaction.max_length;
+}) 
 
-module.exports = Student;
+const Thoughts = model('Thoughts', thoughtSchema);
+
+module.exports = Thoughts;

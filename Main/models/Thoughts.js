@@ -31,8 +31,8 @@ const thoughtsSchema = new Schema(
   }
 );
 
-thyoughtsSchema.virtual ('reactionCount').get(function (){
-  return this.reaction.max_length;
+thoughtsSchema.virtual ('reactionCount').get(function (){
+  return this.reaction.length;
 }) 
 
 const Thoughts = model('Thoughts', thoughtSchema);

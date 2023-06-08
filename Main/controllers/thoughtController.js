@@ -22,17 +22,16 @@ module.exports = {
   // Get a single thoughts
   async getSingleThought(req, res) {
     try {
-      const thoughts = await Thoughts.findOne({ _id: req.params.thoughtsId })
+      const thoughts = await Thoughts.findOne({ _id: req.params.thoughtId })
         .select('-__v');
 
       if (!thoughts) {
         return res.status(404).json({ message: 'No thoughts with that ID' })
       }
 
-      res.json({
-        thoughts,
-        grade: await grade(req.params.thoughtsId),
-      });
+      res.json(
+        thoughts
+      );
     } catch (err) {
       console.log(err);
       return res.status(500).json(err);
@@ -56,7 +55,7 @@ module.exports = {
   // Delete a thoughts and remove them from the user
   async deleteThought(req, res) {
     try {
-      const thoughts = await Thoughts.findOneAndRemove({ _id: req.params.thoughtsId });
+      const thoughts = await Thoughts.findOneAndRemove({ _id: req.params.thoughtId });
 
       if (!thoughts) {
         return res.status(404).json({ message: 'No such thoughts exists' });
@@ -108,7 +107,7 @@ module.exports = {
   async removeReaction(req, res) {
     try {
       const thoughts = await Thoughts.findOneAndUpdate(
-        { _id: req.params.thoughtsId },
+        { _id: req.params.thoughtId },
         { $pull: { reaction: { reactionId: req.params.reactionId } } },
         { runValidators: true, new: true }
       );

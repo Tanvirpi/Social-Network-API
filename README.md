@@ -24,7 +24,7 @@ THEN I am able to successfully create and delete reactions to thoughts and add a
 
 ### Video
 
-[Live](https://drive.google.com/file/d/1cRqhyCJDcpiwOA0qYz53NML1xSbQuuRx/view?usp=drive_link)
+[Live](https://drive.google.com/file/d/1KMNVmTiTr0GP1bO1DTtHqFo-F0Nsv_YV/view)
 
 
 ### References
